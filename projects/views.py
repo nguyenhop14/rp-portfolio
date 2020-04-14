@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.views import generic 
 # Create your views here.
 from django.shortcuts import render
 from projects.models import Project
@@ -16,3 +16,5 @@ def project_detail(request, pk):
         'project': project
     }
     return render(request, 'projects/project_detail.html', context)
+
+    

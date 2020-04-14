@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <table>
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Delete</th>
+              </tr>
+          </thead>
+
+            {{ children.management_form }}
+						<div id="form_set">
+            {% for child_form in children.forms %}
+                {% for hidden in child_form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+                <tr class="no_error">
+                    {% for field in child_form.visible_fields %}
+                        <td>
+                            {{ field.errors.as_ul }}
+                            {{ field }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}</div>
+        </table>
+				<input type="button" value="Add More" id="add_more">
+						<div id="empty_form" style="display:none">
+    					<table class='no_error'>
+        				{{ children.empty_form.as_table }}
+    					</table>
+						</div>
+
+        <p>
+            <input type="submit" value="Save">
+            <a href="{% url 'family:parents_list' %}">back to the list</a>
+        </p>
+    </form>
+</div>
+
+<script>
+    $('#add_more').click(function() {
+				alert("ahsud");
+        
+    });
+</script>
+{% endblock %}

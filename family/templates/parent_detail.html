@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block page_content %}
+<h1>{{ parent.name }}</h1>
+<a href='{% url "family:parent_delete" parent.pk %}'>Delete </a>
+<a href='{% url "family:parent_update" parent.pk %}'>Edit </a>
+{% for child in parent.child_set.all %}
+    <div>{{ child.name}} </div>
+{% endfor %}
+<a href="{% url 'family:parents_list' %}">back to the list</a>
+<script type="text/javascript">
+  $(document).ready(function(){
+    
+  });
+</script>
+{% endblock %}

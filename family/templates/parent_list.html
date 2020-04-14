@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block page_content %}
+{% if parent_list %}
+  {% for parent in parent_list  %}
+  <table>
+    <tr>
+      <td><a href = '{% url "family:parent_detail" parent.id %}'>{{ parent.name }}</a></td>
+      <td><a href='{% url "family:parent_delete" parent.pk %}'>Delete </a></td>
+      <td><form method="POST" action="{% url "family:parent_delete" parent.pk %}">
+        {% csrf_token %}<input type="submit" value="DELETE">
+      </form>
+      </td>
+      <td><a href='{% url "family:parent_update" parent.pk %}'>Edit </a></td>
+    </tr>
+  </table>
+  {% endfor %}
+{% else %}
+No parent are available.
+{% endif %}
+<a href="create">Create new Parent </a>
+<div id="olo"> Click to talk </div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#olo").click(function(){
+      $(this).hide();
+    });
+  });
+</script>
+{% endblock %}
